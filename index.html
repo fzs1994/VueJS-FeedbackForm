@@ -58,16 +58,19 @@
                         <div class="row">
                             <div class="input-field col s12 l6">
                                 <p for="fType">Feedback Type</p>
-                                <div>
-                                    <input name="fType" type="radio" id="comments" value="Comments" data-error="#e4" required v-model="feedbackType">
-                                    <label for="comments">Comments</label>
-                                </div>
                                 <p>
-                                    <input name="fType" type="radio" id="bugs" value="Bug Reports" v-model="feedbackType">
+                                    <input class="with-gap" name="fType" type="radio" id="gen-feed" value="General Feedback" data-error="#e4" required v-model="feedbackType">
+                                    <label for="gen-feed">General Feedback</label>
+                                <p>
+                                <p>
+                                    <input class="with-gap" name="fType" type="radio" id="improvements" value="Improvements" data-error="#e4" v-model="feedbackType">
+                                    <label for="improvements">Improvement(s)</label>
+                                <p>
+                                    <input class="with-gap" name="fType" type="radio" id="bugs" value="Bug Reports" v-model="feedbackType">
                                     <label for="bugs">Bug Reports</label>
                                 </p>
                                 <p>
-                                    <input name="fType" type="radio" id="ques" value="Questions" v-model="feedbackType">
+                                    <input class="with-gap" name="fType" type="radio" id="ques" value="Questions" v-model="feedbackType">
                                     <label for="ques">Questions</label>
                                 </p>
                                 <div class="input-field">
@@ -79,8 +82,8 @@
                             <div class="input-field col s12 l6">
                                 <p for="likes">What you Liked?</p>
                                 <p>
-                                    <input type="checkbox" name="likes" id="ui" value="U.I." data-error="#e7" required v-model="likes">
-                                    <label for="ui">U.I.</label>
+                                    <input type="checkbox" name="likes" id="ui" value="User Interface" data-error="#e7" required v-model="likes">
+                                    <label for="ui">User Interface</label>
                                 </p>
                                 <p>
                                     <input type="checkbox" name="likes" id="logic" value="Business Logic" v-model="likes">
@@ -90,12 +93,112 @@
                                     <input type="checkbox" name="likes" id="performance" value="Performance" v-model="likes">
                                     <label for="performance">Performance</label>
                                 </p>
+                                <p>
+                                    <input type="checkbox" name="likes" id="service" value="Service" v-model="likes">
+                                    <label for="service">Service</label>
+                                </p>
                                 <div class="input-field">
                                     <br>
                                     <div id="e7"></div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div v-if="feedbackType === 'General Feedback'">
+                                <div class="col s12">
+                                    <div class="card hoverable">
+                                        <p>How much would you recommend this software to your Friends or Collegues?</p>
+                                        <!-- <p class="inline">
+                                          <input class="with-gap" name="group1" type="radio" id="1" />
+                                          <label for="1">1</label>
+                                        </p>
+
+                                        <p class="inline">
+                                          <input class="with-gap" name="group1" type="radio" id="2" />
+                                          <label for="2">2</label>
+                                        </p> -->
+                                        <p class="range-field">
+                                          <input type="range" id="recommend" min="0" max="10" v-model="recommend"/>
+                                        </p>
+                                    </div> 
+
+                                    <div class="card hoverable">
+                                        <p>How much we satisfied you need?</p>
+                                        <p class="range-field">
+                                          <input type="range" id="satisfied" min="0" max="10" v-model="satisfied"/>
+                                        </p>
+                                    </div>
+
+                                    <div class="card hoverable">
+                                        <p>How was the software outcome?</p>
+                                        <p class="range-field">
+                                          <input type="range" id="outcome" min="0" max="10" v-model="outcome"/>
+                                        </p>
+                                    </div>
+
+                                    <div class="card hoverable">
+                                        <p>How is the after sales service?</p>
+                                        <p class="range-field">
+                                          <input type="range" id="service" min="0" max="10" v-model="service"/>
+                                        </p>
+                                    </div>
+
+                                    <div class="card hoverable">
+                                        <p>Is the product delivered on time?</p>
+                                        <p class="range-field">
+                                          <input type="range" id="time" min="0" max="10" v-model="time"/>
+                                        </p>
+                                    </div>  
+
+                                    <div class="input-field col s12">
+                                        <textarea id="bio" name="bio" class="materialize-textarea" data-error="#e6" required rows="5" v-model="description"></textarea>
+                                        <label for="bio">Any other feedback?</label>
+                                        <div id="e6"></div>
+                                    </div>  
+                                </div>
+                                
+                            </div>
+
+                            <div v-else-if="feedbackType === 'Improvements'">
+                                <div class="input-field col s12">
+                                    <textarea id="bio" name="bio" class="materialize-textarea" data-error="#e6" required rows="5" v-model="description"></textarea>
+                                    <label for="bio">Describe Improvement(s)</label>
+                                    <div id="e6"></div>
+                                </div>
+                            </div>
+
+                            <div v-else-if="feedbackType === 'Bug Reports'">
+                                
+                                <div class="input-field col s12">
+                                    <textarea id="bio" name="bio" class="materialize-textarea" data-error="#e6" required rows="5" v-model="description"></textarea>
+                                    <label for="bio">Describe Bug</label>
+                                    <div id="e6"></div>
+                                </div>
+                            </div>
+                            
+                            <div v-else-if="feedbackType === 'Questions'">
+                                
+                                <div class="input-field col s12">
+                                    <textarea id="bio" name="bio" class="materialize-textarea" data-error="#e6" required rows="5" v-model="description"></textarea>
+                                    <label for="bio">Describe Question</label>
+                                    <div id="e6"></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <!-- <div class="row">
+                            <div class="input-field col s12">
+                                <select v-model="satisfied">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                    <option>Okay-Okay</option>
+                                </select>
+                                <label>Are you satisfied with our product? {{ satisfied }}</label>
+                              </div>
+                        </div> -->      
 
                         <!-- <div class="row">
 						    <div class="input-field col s12">
@@ -105,13 +208,13 @@
 						    </div>
 						</div> -->
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="input-field col s12">
                                 <textarea id="bio" name="bio" class="materialize-textarea" data-error="#e6" required rows="5" v-model="description"></textarea>
                                 <label for="bio">Describe Feedback</label>
                                 <div id="e6"></div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="row">
 						    <div class="file-field input-field col s12">

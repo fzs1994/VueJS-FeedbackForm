@@ -83,3 +83,12 @@ div.error {
   -o-transform: translateY(0%);
   transform: translateY(0%);
 }
+
+
+.inline{
+  display: inline;
+}
+
+.card{
+  padding: 25px;
+}

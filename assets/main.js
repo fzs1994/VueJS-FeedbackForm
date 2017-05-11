@@ -33,12 +33,18 @@ new Vue({
     email: "",
     feedbackType: "",
     likes: [],
+    selected: "",
     description: "",
-    screenshotFile: ""
+    screenshotFile: "",
+    recommend: "",
+    satisfied: "",
+    outcome: "",
+    service: "",
+    time: ""
   },
   methods: {
     submitFeedback: function(){
-      alert("Feedback Details: \n Name: " + this.name + "\n Email: " + this.email + "\n Feedback Type: " + this.feedbackType + "\n You Like: " + this.likes + "\n Description: " + this.description );
+      alert("Feedback Details: \n Name: " + this.name + "\n Email: " + this.email + "\n Feedback Type: " + this.feedbackType + "\n You Like: " + this.likes + "\n Satisfaction: " + this.selected + "\n Recommend: " + this.recommend + "\n Satisfied: " + this.satisfied + "\n Outcome: " + this.outcome + "\n service: " + this.service + "\n Time: " + this.time + "\n Description: " + this.description);
       // + "\n File Name: " + this.screenshotFile
     },
 
@@ -53,6 +59,24 @@ new Vue({
   }
 });
 
-Vue.component('my-comp',{
-  
+Vue.directive("select", {
+    "twoWay": true,
+
+    "bind": function () {
+        $(this.el).material_select();
+
+        var self = this;
+
+        $(this.el).on('change', function() {
+            self.set($(self.el).val());
+        });
+    },
+
+    update: function (newValue, oldValue) {
+        $(this.el).val(newValue);
+    },
+
+    "unbind": function () {
+        $(this.el).material_select('destroy');
+    }
 });
